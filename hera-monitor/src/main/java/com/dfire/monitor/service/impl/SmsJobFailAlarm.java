@@ -97,9 +97,9 @@ public class SmsJobFailAlarm implements JobFailAlarm {
         Set<String> mobiles = new HashSet<>();
         try {
             // job所有人及关注人员都接收短信
-            if (Constants.PUB_ENV.equals(HeraGlobalEnvironment.getEnv())) {
-                HeraUser user = heraUserService.findByName(heraJob.getOwner());
-                mobiles.add(user.getPhone().trim());
+            HeraUser owner = heraUserService.findByName(heraJob.getOwner());
+            if (owner != null && owner.getPhone() != null && owner.getPhone().trim() != "") {
+                mobiles.add(owner.getPhone().trim());
             }
 
             HeraJobMonitor monitor = heraJobMonitorService.findByJobId(heraJob.getId());

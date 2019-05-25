@@ -17,6 +17,7 @@ import com.dfire.common.util.HeraDateTool;
 import com.dfire.config.HeraGlobalEnvironment;
 import com.dfire.event.HeraJobFailedEvent;
 import com.dfire.logs.ErrorLog;
+import com.dfire.logs.HeraLog;
 import com.dfire.logs.ScheduleLog;
 import com.dfire.monitor.config.Alarm;
 import com.dfire.monitor.service.JobFailAlarm;
@@ -82,6 +83,7 @@ public class SmsJobFailAlarm implements JobFailAlarm {
 
     @Override
     public void alarm(HeraJobFailedEvent failedEvent) {
+        HeraLog.info("alarm with sms.");
         String actionId = failedEvent.getActionId();
         Integer jobId = ActionUtil.getJobId(actionId);
         if (jobId == null) {
